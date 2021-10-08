@@ -1,20 +1,20 @@
-import { getNextStaticProps } from '@faustjs/next';
-import { client, OrderEnum, PostObjectsConnectionOrderbyEnum } from 'client';
-import { Footer, Header, Pagination, Posts } from 'components';
-import { GetStaticPropsContext } from 'next';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import React from 'react';
-import styles from 'scss/pages/posts.module.scss';
+import { getNextStaticProps } from "@faustjs/next";
+import { client, OrderEnum, PostObjectsConnectionOrderbyEnum } from "client";
+import { Footer, Header, Pagination, Posts } from "components";
+import { GetStaticPropsContext } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import React from "react";
+import styles from "scss/pages/posts.module.scss";
 
-const POSTS_PER_PAGE = 6;
+const POSTS_PER_PAGE = 100;
 
 export default function Page() {
   const { query = {} } = useRouter();
   const { postSlug, postCursor } = query;
   const { usePosts, useQuery } = client;
   const generalSettings = useQuery().generalSettings;
-  const isBefore = postSlug === 'before';
+  const isBefore = postSlug === "before";
   const posts = usePosts({
     after: !isBefore ? (postCursor as string) : undefined,
     before: isBefore ? (postCursor as string) : undefined,
@@ -29,8 +29,8 @@ export default function Page() {
   return (
     <>
       <Header
-        title={generalSettings.title}
-        description={generalSettings.description}
+        title="テスト作成"
+        description="Next.jsとWordPressのJamStack構成"
       />
 
       <Head>

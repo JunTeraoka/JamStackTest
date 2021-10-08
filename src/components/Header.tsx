@@ -1,7 +1,7 @@
-import React from 'react';
-import styles from 'scss/components/Header.module.scss';
-import Link from 'next/link';
-import { client, MenuLocationEnum } from 'client';
+import React from "react";
+import styles from "scss/components/Header.module.scss";
+import Link from "next/link";
+import { client, MenuLocationEnum } from "client";
 
 interface Props {
   title?: string;
@@ -9,10 +9,10 @@ interface Props {
 }
 
 function Header({
-  title = 'Headless by WP Engine',
+  title = "Headless by WP Engine",
   description,
 }: Props): JSX.Element {
-  const { menuItems } = client.useQuery()
+  const { menuItems } = client.useQuery();
   const links = menuItems({
     where: { location: MenuLocationEnum.PRIMARY },
   }).nodes;
@@ -20,8 +20,8 @@ function Header({
   return (
     <header>
       <div className={styles.wrap}>
-        <div className={styles['title-wrap']}>
-          <p className={styles['site-title']}>
+        <div className={styles["title-wrap"]}>
+          <p className={styles["site-title"]}>
             <Link href="/">
               <a>{title}</a>
             </Link>
@@ -32,16 +32,17 @@ function Header({
           <ul>
             {links?.map((link) => (
               <li key={`${link.label}$-menu`}>
-                <Link href={link.url ?? ''}>
+                <Link href={link.url ?? ""}>
                   <a href={link.url}>{link.label}</a>
                 </Link>
               </li>
             ))}
             <li>
-              <Link href="https://github.com/wpengine/faustjs">
+              <Link href="https://github.com/YukiOkamoto0206/JamStackTest">
                 <a
                   className="button"
-                  href="https://github.com/wpengine/faustjs">
+                  href="https://github.com/YukiOkamoto0206/JamStackTest"
+                >
                   GitHub
                 </a>
               </Link>
