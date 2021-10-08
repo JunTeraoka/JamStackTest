@@ -12,7 +12,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   useEffect(() => {
     const path = router.pathname;
-    console.log(path);
     if ((router.pathname = "/")) router.push("/posts");
   }, []);
   return (

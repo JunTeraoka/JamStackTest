@@ -49,6 +49,7 @@ function Posts({
                       src={post?.featuredImage?.node?.sourceUrl()}
                       width={1280}
                       height={720}
+                      alt="画像"
                     />
                   </a>
                 </Link>

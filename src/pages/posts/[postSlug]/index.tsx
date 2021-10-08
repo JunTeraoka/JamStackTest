@@ -2,7 +2,7 @@ import { getNextStaticProps, is404 } from "@faustjs/next";
 import { client, Post } from "client";
 import { Footer, Header, Hero } from "components";
 import { GetStaticPropsContext } from "next";
-import Head from "next/head";
+import { useRouter } from "next/router";
 
 export interface PostProps {
   post: Post | Post["preview"]["node"] | null | undefined;
@@ -11,12 +11,16 @@ export interface PostProps {
 export function PostComponent({ post }: PostProps) {
   const { useQuery } = client;
   const generalSettings = useQuery().generalSettings;
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
       <Header
-        title={generalSettings.title}
-        description={generalSettings.description}
+        title="テスト作成"
+        description="Next.jsとWordPressのJamStack構成"
       />
 
       <Hero
