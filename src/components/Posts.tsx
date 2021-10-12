@@ -1,18 +1,18 @@
-import React from "react";
-import Link from "next/link";
-import type { Post } from "client";
-import styles from "scss/components/Posts.module.scss";
-import Heading, { HeadingProps } from "./Heading";
-import Image from "next/image";
+import React from 'react'
+import Link from 'next/link'
+import type { Post } from 'client'
+import styles from 'scss/components/Posts.module.scss'
+import Heading, { HeadingProps } from './Heading'
+import Image from 'next/image'
 
 interface Props {
-  posts: Post[] | undefined;
-  intro?: string;
-  id?: string;
-  heading?: string;
-  headingLevel?: HeadingProps["level"];
-  postTitleLevel?: HeadingProps["level"];
-  readMoreText?: string;
+  posts: Post[] | undefined
+  intro?: string
+  id?: string
+  heading?: string
+  headingLevel?: HeadingProps['level']
+  postTitleLevel?: HeadingProps['level']
+  readMoreText?: string
 }
 
 function Posts({
@@ -20,14 +20,14 @@ function Posts({
   intro,
   heading,
   id,
-  headingLevel = "h1",
-  postTitleLevel = "h2",
-  readMoreText = "Read more",
+  headingLevel = 'h1',
+  postTitleLevel = 'h2',
+  readMoreText = 'Read more',
 }: Props): JSX.Element {
-  console.log(posts);
+  console.log(posts)
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <section className={styles["posts-block"]} {...(id && { id })}>
+    <section className={styles['posts-block']} {...(id && { id })}>
       <div className="wrap">
         {heading && (
           <Heading level={headingLevel} className={styles.heading}>
@@ -39,7 +39,7 @@ function Posts({
           {posts.map((post) => (
             <div
               className={styles.single}
-              key={post.id ?? ""}
+              key={post.id ?? ''}
               id={`post-${post.id}`}
             >
               {post.featuredImage.node.sourceUrl() ? (
@@ -69,7 +69,7 @@ function Posts({
         </div>
       </div>
     </section>
-  );
+  )
 }
 
-export default Posts;
+export default Posts
