@@ -42,11 +42,11 @@ function Posts({
               key={post.id ?? ''}
               id={`post-${post.id}`}
             >
-              {post.featuredImage.node.sourceUrl() ? (
+              {post.featuredImage?.node?.sourceUrl() ? (
                 <Link href={`/posts/${post.slug}`}>
                   <a>
                     <Image
-                      src={post?.featuredImage?.node?.sourceUrl()}
+                      src={post.featuredImage.node.sourceUrl()}
                       width={1280}
                       height={720}
                       alt="画像"
@@ -54,7 +54,16 @@ function Posts({
                   </a>
                 </Link>
               ) : (
-                <></>
+                  <Link href={`/posts/${post.slug}`}>
+                    <a>
+                      <Image
+                          src="/images/no_image.png"
+                          width={1280}
+                          height={720}
+                          alt="画像"
+                      />
+                    </a>
+                  </Link>
               )}
               <div>
                 <Heading level={postTitleLevel} className={styles.title}>

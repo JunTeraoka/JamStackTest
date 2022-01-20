@@ -29,8 +29,8 @@ export default function Page() {
   return (
     <>
       <Header
-        title="テスト作成"
-        description="Next.jsとWordPressのJamStack構成"
+          title={generalSettings.title}
+          description={generalSettings.description}
       />
 
       <Head>

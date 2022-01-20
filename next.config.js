@@ -6,6 +6,6 @@ const { withFaust } = require("@faustjs/next");
 module.exports = withFaust();
 module.exports = {
   images: {
-    domains: ["next.jitensha-hoken.jp"],
+    domains: ["staging.jitensha-hoken.jp"],
   },
 };

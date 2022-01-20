@@ -11,17 +11,14 @@ export default function Page() {
   const { usePosts, useQuery } = client
   const generalSettings = useQuery().generalSettings
   const posts = usePosts({
-    first: 6,
-    where: {
-      categoryName: 'uncategorized',
-    },
+    first: 6
   })
 
   return (
     <>
       <Header
-        title="テスト作成"
-        description="Next.jsとWordPressのJamStack構成"
+        title={generalSettings.title}
+        description={generalSettings.description}
       />
 
       <main className="content">
