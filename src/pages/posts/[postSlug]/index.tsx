@@ -3,6 +3,7 @@ import { client, Post } from "client";
 import { Footer, Header, Hero } from "components";
 import { GetStaticPropsContext } from "next";
 import { useRouter } from "next/router";
+import React from "react";
 
 export interface PostProps {
   post: Post | Post["preview"]["node"] | null | undefined;
@@ -19,8 +20,8 @@ export function PostComponent({ post }: PostProps) {
   return (
     <>
       <Header
-        title="テスト作成"
-        description="Next.jsとWordPressのJamStack構成"
+        title={generalSettings.title}
+        description={generalSettings.description}
       />
 
       <Hero

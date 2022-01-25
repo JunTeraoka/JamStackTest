@@ -973,12 +973,12 @@ export enum MediaItemSizeEnum {
   MEDIUM_LARGE = "MEDIUM_LARGE",
   /** MediaItem with the post-thumbnail size */
   POST_THUMBNAIL = "POST_THUMBNAIL",
+  /** MediaItem with the rpwe-thumbnail size */
+  RPWE_THUMBNAIL = "RPWE_THUMBNAIL",
   /** MediaItem with the smaller-thumbnail size */
   SMALLER_THUMBNAIL = "SMALLER_THUMBNAIL",
   /** MediaItem with the thumbnail size */
   THUMBNAIL = "THUMBNAIL",
-  /** MediaItem with the yarpp-thumbnail size */
-  YARPP_THUMBNAIL = "YARPP_THUMBNAIL",
   /** MediaItem with the 1536x1536 size */
   _1536X1536 = "_1536X1536",
   /** MediaItem with the 2048x2048 size */
@@ -2564,7 +2564,13 @@ export enum UserRoleEnum {
   /** User role with specific capabilities */
   EDITOR = "EDITOR",
   /** User role with specific capabilities */
+  SEO_EDITOR = "SEO_EDITOR",
+  /** User role with specific capabilities */
+  SEO_MANAGER = "SEO_MANAGER",
+  /** User role with specific capabilities */
   SUBSCRIBER = "SUBSCRIBER",
+  /** User role with specific capabilities */
+  _________2 = "_________2",
 }
 
 /** Column used for searching for users. */

@@ -24,7 +24,6 @@ function Posts({
   postTitleLevel = 'h2',
   readMoreText = 'Read more',
 }: Props): JSX.Element {
-  console.log(posts)
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <section className={styles['posts-block']} {...(id && { id })}>
