@@ -16,6 +16,13 @@ body {
 	padding: 0 10px;
 }
 
+.content-single .wrap {
+	margin: 0 auto;
+	max-width: $single-content-width;
+	overflow: auto;
+	padding: 0 10px;
+}
+
 .content-page .wrap,
 .content-single .wrap,
 .content-index .wrap {
@@ -77,4 +84,11 @@ body {
 
 .pagination-next {
 	text-align: right;
+}
+
+
+// 記事ページ
+.content-single .wrap img {
+	max-width: $single-content-width - 40px;
+	height: auto;
 }
