@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import styles from "scss/components/Header.module.scss";
 import Link from "next/link";
 import { client, MenuLocationEnum } from "client";
+import SearchForm from "./SearchForm";
 
 interface Props {
   title?: string;
@@ -34,17 +35,15 @@ function Header({
                 </Link>
               </li>
             ))}
-            <li>
-              <Link href="https://github.com/JunTeraoka/JamStackTest">
-                <a
-                  className="button"
-                  href="https://github.com/JunTeraoka/JamStackTest"
-                >
-                  GitHub
-                </a>
-              </Link>
-            </li>
           </ul>
+          <div className={styles["right-group"]}>
+            <Link href="https://github.com/JunTeraoka/JamStackTest">
+              <a className="button">
+                GitHub
+              </a>
+            </Link>
+            <SearchForm />
+          </div>
         </div>
       </div>
     </header>

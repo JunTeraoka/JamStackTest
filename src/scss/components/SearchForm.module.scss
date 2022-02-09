@@ -1,0 +1,9 @@
+// CSS for the Header component in components/SearchForm.tsx.
+
+@import "scss/variables";
+
+.search-form input {
+	width: 150px;
+	font-size: 15px;
+	padding: 7px;
+}
