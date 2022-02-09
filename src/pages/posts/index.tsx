@@ -10,7 +10,7 @@ import styles from 'scss/pages/posts.module.scss'
 const POSTS_PER_PAGE = 100
 
 export default function Page() {
-  const { query = {} } = useRouter()
+  const { query } = useRouter()
   const { postSlug, postCursor } = query
   const { usePosts, useQuery } = client
   const generalSettings = useQuery().generalSettings
@@ -20,6 +20,7 @@ export default function Page() {
     before: isBefore ? (postCursor as string) : undefined,
     first: !isBefore ? POSTS_PER_PAGE : undefined,
     last: isBefore ? POSTS_PER_PAGE : undefined,
+    where: { search: query.s ? (query.s as string) : undefined },
   })
 
   if (useQuery().$state.isLoading) {
@@ -42,7 +43,7 @@ export default function Page() {
       <main className="content content-index">
         <Posts
           posts={posts.nodes}
-          heading="Blog Posts"
+          heading={query.s? `Search Result for "${query.s}"`: "Blog Posts"}
           headingLevel="h2"
           postTitleLevel="h3"
           id={styles.post_list}

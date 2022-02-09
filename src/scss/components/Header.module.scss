@@ -56,6 +56,13 @@
 	}
 }
 
+.menu {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0 10px;
+}
+
 .menu ul {
 	padding-left: 0
 }
@@ -69,12 +76,6 @@
 
 .menu li:first-of-type {
 	padding-left: 0;
-}
-
-@media screen and (min-width: $breakpoint-small) {
-	.menu li:first-of-type {
-		padding-left: 1em;
-	}
 }
 
 .menu a {

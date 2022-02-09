@@ -1,7 +1,7 @@
 import { getNextStaticProps } from '@faustjs/next'
 
 import { GetStaticPropsContext } from 'next'
-import Head from 'next/head'
+import Link from 'next/link'
 import React from 'react'
 import { CTA, Footer, Header, Hero, Posts } from 'components'
 import styles from 'scss/pages/home.module.scss'
@@ -30,6 +30,11 @@ export default function Page() {
           postTitleLevel="h3"
           id={styles.post_list}
         />
+        <Link href="/posts">
+            <a>
+                All posts
+            </a>
+        </Link>
       </main>
       <Footer copyrightHolder={generalSettings.title} />
     </>
