@@ -1,7 +1,5 @@
-import { getNextStaticProps } from '@faustjs/next'
 import { client } from 'client'
 import { Footer, Header, Pagination, Posts } from 'components'
-import { GetStaticPropsContext } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -20,6 +18,7 @@ export default function Page() {
     before: isBefore ? (postCursor as string) : undefined,
     first: !isBefore ? POSTS_PER_PAGE : undefined,
     last: isBefore ? POSTS_PER_PAGE : undefined,
+    where: { search: query.s ? (query.s as string) : undefined },
   })
 
   if (useQuery().$state.isLoading) {
@@ -42,7 +41,7 @@ export default function Page() {
       <main className="content content-index">
         <Posts
           posts={posts.nodes}
-          heading="Blog Posts"
+          heading={`Search Result for "${query.s}"`}
           headingLevel="h2"
           postTitleLevel="h3"
           id={styles.post_list}
@@ -53,11 +52,4 @@ export default function Page() {
       <Footer copyrightHolder={generalSettings.title} />
     </>
   )
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
-  return getNextStaticProps(context, {
-    Page,
-    client,
-  })
 }

@@ -9,7 +9,7 @@ const SearchForm: React.VFC = () => {
   const searchPosts = (e) => {
     e.preventDefault()
     router.push({
-      pathname: "/posts",
+      pathname: "/search",
       query: {s: query}
     })
   }
