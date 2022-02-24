@@ -6,58 +6,58 @@ import { useRouter } from "next/router";
 import React from "react";
 
 export interface PostProps {
-  post: Post | Post["preview"]["node"] | null | undefined;
+    post: Post | Post["preview"]["node"] | null | undefined;
 }
 
 export function PostComponent({ post }: PostProps) {
-  const { useQuery } = client;
-  const generalSettings = useQuery().generalSettings;
-  const router = useRouter();
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  }
+    const { useQuery } = client;
+    const generalSettings = useQuery().generalSettings;
+    const router = useRouter();
+    if (router.isFallback) {
+        return <div>Loading...</div>;
+    }
 
-  return (
-    <>
-      <Header
-        title={generalSettings.title}
-        description={generalSettings.description}
-      />
+    return (
+        <>
+            <Header
+                title={generalSettings.title}
+                description={generalSettings.description}
+            />
 
-      <Hero
-        title={post?.title()}
-        bgImage={post?.featuredImage?.node?.sourceUrl()}
-      />
+            <Hero
+                title={post?.title()}
+                bgImage={post?.featuredImage?.node?.sourceUrl()}
+            />
 
-      <main className="content content-single">
-        <div className="wrap">
-          <div dangerouslySetInnerHTML={{ __html: post?.content() ?? "" }} />
-        </div>
-      </main>
+            <main className="content content-single">
+                <div className="wrap">
+                    <div dangerouslySetInnerHTML={{ __html: post?.content() ?? "" }} />
+                </div>
+            </main>
 
-      <Footer copyrightHolder={generalSettings.title} />
-    </>
-  );
+            <Footer copyrightHolder={generalSettings.title} />
+        </>
+    );
 }
 
 export default function Page() {
-  const { usePost } = client;
-  const post = usePost();
+    const { usePost } = client;
+    const post = usePost();
 
-  return <PostComponent post={post} />;
+    return <PostComponent post={post} />;
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getNextStaticProps(context, {
-    Page,
-    client,
-    notFound: await is404(context, { client }),
-  });
+    return getNextStaticProps(context, {
+        Page,
+        client,
+        notFound: await is404(context, { client }),
+    });
 }
 
 export function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
+    return {
+        paths: [],
+        fallback: "blocking",
+    };
 }
