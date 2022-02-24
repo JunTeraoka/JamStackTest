@@ -1,7 +1,7 @@
 import { getNextStaticProps, is404 } from "@faustjs/next";
 import { client, Post } from "client";
 import { Footer, Header, Hero } from "components";
-import { GetStaticPropsContext } from "next";
+import {GetStaticPaths, GetStaticPropsContext} from "next";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -55,9 +55,30 @@ export async function getStaticProps(context: GetStaticPropsContext) {
   });
 }
 
-export function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
+export const getStaticPaths: GetStaticPaths = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/graphql`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            query: `
+                query MyQuery {
+                  posts {
+                    nodes {
+                      slug
+                    }
+                  }
+                }
+            `,
+        }),
+    });
+    const json = await res.json();
+    const paths = json.data.posts.nodes.map((post) => ({
+        params: {
+            postSlug: `${post.slug}`
+        }
+    }))
+    return {
+        paths,
+        fallback: true,
+    };
 }
