@@ -48,11 +48,11 @@ export default function Page() {
 }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-  return getNextStaticProps(context, {
-    Page,
-    client,
-    notFound: await is404(context, { client }),
-  });
+    return getNextStaticProps(context, {
+        Page,
+        client,
+        notFound: await is404(context, { client }),
+    });
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -79,6 +79,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }))
     return {
         paths,
-        fallback: true,
+        fallback: 'blocking',
     };
 }
