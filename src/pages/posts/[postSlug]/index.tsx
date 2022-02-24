@@ -9,7 +9,7 @@ export interface PostProps {
   post: Post | Post["preview"]["node"] | null | undefined;
 }
 
-export function PostComponent({ post }: PostProps) {
+export default function PostComponent({ post }) {
   const { useQuery } = client;
   const generalSettings = useQuery().generalSettings;
   const router = useRouter();
@@ -25,13 +25,13 @@ export function PostComponent({ post }: PostProps) {
       />
 
       <Hero
-        title={post?.title()}
-        bgImage={post?.featuredImage?.node?.sourceUrl()}
+        title={post?.title}
+        bgImage={post?.featuredImage?.node?.sourceUrl}
       />
 
       <main className="content content-single">
         <div className="wrap">
-          <div dangerouslySetInnerHTML={{ __html: post?.content() ?? "" }} />
+          <div dangerouslySetInnerHTML={{ __html: post?.content ?? "" }} />
         </div>
       </main>
 
@@ -40,20 +40,55 @@ export function PostComponent({ post }: PostProps) {
   );
 }
 
-export default function Page() {
-  const { usePost } = client;
-  const post = usePost();
-
-  return <PostComponent post={post} />;
-}
+// export default function Page() {
+//   const { usePost } = client;
+//   const post = usePost();
+//
+//   return <PostComponent post={post} />;
+// }
 
 export async function getStaticProps(context: GetStaticPropsContext) {
-    return getNextStaticProps(context, {
-        Page,
-        client,
-        notFound: await is404(context, { client }),
+    const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/graphql`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            query: `
+                query MyQuery {
+                  postBy(slug: "${context.params.postSlug}") {
+                    id
+                    slug
+                    title
+                    content
+                    featuredImage {
+                        node {
+                            sourceUrl
+                        }
+                    }
+                  }
+                }
+            `,
+        }),
     });
+    const json = await res.json();
+    console.log(json)
+    if (!json.data.postBy) {
+        return { notFound: true }
+    }
+    return {
+        props: {
+            post: json.data.postBy,
+        },
+        revalidate: 10,
+    }
 }
+
+// export async function getStaticProps(context: GetStaticPropsContext) {
+//     return getNextStaticProps(context, {
+//         Page,
+//         client,
+//         notFound: await is404(context, { client }),
+//     });
+// }
 
 export const getStaticPaths: GetStaticPaths = async () => {
     const res = await fetch(`${process.env.NEXT_PUBLIC_WORDPRESS_URL}/graphql`, {
@@ -79,6 +114,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }))
     return {
         paths,
-        fallback: 'blocking',
+        fallback: true,
     };
 }
